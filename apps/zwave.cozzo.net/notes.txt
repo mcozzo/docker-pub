@@ -1,0 +1,3 @@
+curl -X POST https://homeassistant.cozzo.net/api/webhook/e7e7fe2928a0c4d1d534373825eabfdce31dee43e114450129b85c3b6ca9fbdd -H "Content-Type: application/json; charset=utf-8" -d $'{"lifecycle": "PING", "executionId": "00000000-0000-0000-0000-000000000000", "locale": "en", "version": "1.0.0", "pingData": { "challenge": "00000000-0000-0000-0000-000000000000"}}'
+
+e7e7fe2928a0c4d1d534373825eabfdce31dee43e114450129b85c3b6ca9fbdd

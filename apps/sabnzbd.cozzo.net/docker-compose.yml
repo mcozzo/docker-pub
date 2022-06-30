@@ -1,0 +1,23 @@
+---
+version: '2'
+services:
+  sabnzbd:
+    image: "linuxserver/sabnzbd"
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+    volumes:
+      #- /mnt/dockeriscsi/configs/sabnzbd.cozzo.net/config:/config
+      - sabnzbd_cozzo_net_config:/config
+      - /mnt/download:/shareddata
+
+volumes:
+  sabnzbd_cozzo_net_config:
+    driver: netapp:latest
+#    driver_opts:
+#      snapshotDir: "false"

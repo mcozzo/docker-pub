@@ -1,0 +1,57 @@
+---
+
+
+version: "2.1"
+services:
+  plex:
+    # https://hub.docker.com/r/linuxserver/plex
+    #image: ghcr.io/linuxserver/plex:latest
+    #image: ghcr.io/linuxserver/plex
+
+    #https://hub.docker.com/r/plexinc/pms-docker/
+    image: plexinc/pms-docker:plexpass
+    #image: plexinc/pms-docker
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - PLEX_UID=1001
+      - PLEX_GID=1001
+      - VERSION=beta
+      - TZ=America/Los_Angeles
+      #- UMASK_SET=022 #optional
+      #- PLEX_CLAIM= #optional
+    volumes:
+      #- /mnt/docker/configs/plex.cozzo.net/config:/config
+      - /mnt/docker-local/config:/config
+      #- plex_cozzo_net_config:/config
+      - /mnt/media:/data
+      #- /mnt/s3:/s3
+      #- /mnt/s3/movies:/s3/movies
+      #- /mnt/s3/4kmovies:/s3/4kmovies
+      #- /mnt/s3/tv:/s3/tv
+      #- /mnt/ramdisk:/transcode
+      - /dev/shm:/transcode
+      - /mnt/docker/certs/plex.cozzo.net:/certs
+    restart: unless-stopped
+    # Ports are used in bridge mode not host
+    #ports:
+    #  - 32400:32400/tcp
+    #  - 3005:3005/tcp
+    #  - 8324:8324/tcp
+    #  - 32469:32469/tcp
+    #  - 1900:1900/udp
+    #  - 32410:32410/udp
+    #  - 32412:32412/udp
+    #  - 32413:32413/udp
+    #  - 32414:32414/udp
+
+#volumes:
+#  plex_cozzo_net_config:
+#    driver: netapp-iscsi:latest
+#    driver_opts:
+#      size: 200G
+
+# sudo rsync -ah --progress /mnt/docker/.snapshot/20210908-Plex/configs/plex/config/Library /home/mattcozzolino/plex/
+# sudo rsync -ah --progress /mnt/docker/.snapshot/20210908-Plex/configs/plex.cozzo.net/config/

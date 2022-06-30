@@ -1,0 +1,28 @@
+---
+version: '2'
+services:
+  radarr:
+    image: "linuxserver/radarr"
+    restart: unless-stopped
+    ports:
+      - "7878:7878"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+    volumes:
+      #- /mnt/docker/configs/radarr.cozzo.net/config:/config
+      - /mnt/docker-local/configs/radarr.cozzo.net/config:/config
+      #- /mnt/dockeriscsi/configs/radarr.cozzo.net/config:/config
+      #- radarr_cozzo_net_config:/config
+      - /mnt/download:/shareddata
+      - /mnt/media/Movies:/movies
+      - /mnt/s3:/s3
+
+#volumes:
+#  radarr_cozzo_net_config:
+#    driver: netapp-iscsi:latest
+
+
+# sudo rsync -ah --progress /mnt/docker-local/configs/radarr.cozzo.net/config /mnt/docker/configs/radarr.cozzo.net/
+# sudo rsync -ah --progress /mnt/docker/configs/radarr.cozzo.net/config /mnt/docker-local/configs/radarr.cozzo.net/

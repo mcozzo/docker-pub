@@ -1,0 +1,18 @@
+---
+version: '2.2'
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:stable
+    #user: "1001:1001"
+    user: "0:0"
+    ports:
+      - "8123:8123"
+    volumes:
+      - /mnt/docker/configs/homeassistant.cozzo.net/config:/config
+      #- /mnt/docker/certs/homeassistant.cozzo.net:/certs
+    environment:
+      - TZ=America/Los_Angeles
+    restart: unless-stopped
+    #network_mode: host
+    privileged: true

@@ -1,0 +1,17 @@
+---
+# https://github.com/LukeChannings/moviematch
+# Token
+# https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
+version: '3'
+services:
+  moviematch:
+    image: lukechannings/moviematch:latest
+    container_name: moviematch
+    restart: unless-stopped
+    environment:
+      - TZ=America/Los_Angeles
+      - PLEX_URL=http://plex.cozzo.net:32400
+      - PLEX_TOKEN=
+      - LIBRARY_FILTER=Movies,TV
+    ports:
+      - 8000:8000

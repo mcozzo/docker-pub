@@ -1,0 +1,21 @@
+---
+version: '2'
+services:
+  tautulli:
+    image: "linuxserver/tautulli"
+    restart: unless-stopped
+    ports:
+      - "8181:8181"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/docker/configs/tautulli.cozzo.net/config:/config
+      #- /mnt/dockeriscsi/configs/tautulli.cozzo.net/config:/config
+      #- tautulli_cozzo_net_config:/config
+      #- /mnt/docker/configs/plex/config/Library/Application Support/Plex Media Server/Logs:/logs:ro
+
+#volumes:
+#  tautulli_cozzo_net_config:
+#    driver: netapp-iscsi:latest

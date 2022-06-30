@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  esphome:
+    image: esphome/esphome
+    volumes:
+      - /mnt/docker/configs/esphome.cozzo.net/config/:/config:rw
+      # Use local time for logging timestamps
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    restart: always
+    restart: unless-stopped
+
+# Access @ X.X.X.X:6052

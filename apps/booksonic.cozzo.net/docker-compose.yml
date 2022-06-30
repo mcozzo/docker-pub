@@ -1,0 +1,26 @@
+---
+version: '2'
+services:
+  booksonic:
+    #image: "linuxserver/booksonic"
+    image: lscr.io/linuxserver/booksonic-air
+    restart: unless-stopped
+    ports:
+      - "4040:4040"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+      - CONTEXT_PATH=/
+    volumes:
+      - /mnt/docker/configs/booksonic.cozzo.net/config:/config
+      #- /mnt/dockeriscsi/configs/booksonic.cozzo.net/config:/config
+      #- booksonic_cozzo_net_config:/config
+      - /mnt/media/Audiobooks:/audiobooks
+      - /mnt/media/Podcasts:/podcasts
+
+#volumes:
+#  booksonic_cozzo_net_config:
+#    driver: netapp:latest
+#    driver_opts:
+#      snapshotDir: "true"

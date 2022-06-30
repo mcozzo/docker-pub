@@ -1,0 +1,28 @@
+---
+version: '2'
+services:
+  sonarr:
+    image: "linuxserver/sonarr"
+    restart: unless-stopped
+    ports:
+      - "8988:8989"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+    volumes:
+      #- /mnt/docker/configs/sonarr.cozzo.net/config:/config
+      - /mnt/docker-local/configs/sonarr4k.cozzo.net/config:/config
+      #- /mnt/dockeriscsi/configs/sonarr.cozzo.net/config:/config
+      #- sonarr_cozzo_net_config:/config
+      - /mnt/download:/shareddata
+      - /mnt/media/TV:/media/media/TV
+      - /mnt/media/Anime:/media/media/Anime
+      - /mnt/s3:/s3
+
+#volumes:
+#  sonarr_cozzo_net_config:
+#    driver: netapp-iscsi:latest
+
+
+# sudo rsync -ah --progress /mnt/docker-local/configs/sonarr.cozzo.net/config /mnt/docker/configs/sonarr.cozzo.net/

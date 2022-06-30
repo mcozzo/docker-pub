@@ -1,0 +1,35 @@
+################################################################################
+# Node-RED Stack or Compose
+################################################################################
+# docker stack deploy node-red --compose-file docker-compose-node-red.yml
+# docker-compose -f docker-compose-node-red.yml -p myNoderedProject up
+################################################################################
+# Generate password hash:
+# sudo docker exec -it <Container_ID> npx node-red admin hash-pw
+---
+version: "2.2"
+
+services:
+  node-red:
+    image: nodered/node-red:latest
+    #user: "1001:1001"
+    user: "0:1001"
+    environment:
+      - TZ=America/Los_Angeles
+    ports:
+      - "1880:1880"
+    #network_mode: host
+    #networks:
+    #  - node-red-net
+    volumes:
+      #- node-red-data:/data
+      - /mnt/docker/configs/nodered.cozzo.net/config:/data
+    restart: unless-stopped
+
+#volumes:
+#  node-red-data:
+
+#networks:
+#  node-red-net:
+
+#

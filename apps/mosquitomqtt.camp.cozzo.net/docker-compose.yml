@@ -1,0 +1,26 @@
+# https://hub.docker.com/_/eclipse-mosquitto
+# sudo docker exec -it <Container> mosquitto_passwd -b /mosquitto/data/password <user> <password>
+
+version: "2.2"
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    #user: "1001:1001"
+    #user: "0:0"
+    environment:
+      - TZ=America/Los_Angeles
+      #- PUID=1001
+      #- PGID=1001
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    #network_mode: host
+    #networks:
+    #  - node-red-net
+    volumes:
+      #- node-red-data:/data
+      - /mnt/docker/configs/mosquitto.cozzo.net/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /mnt/docker/configs/mosquitto.cozzo.net/data:/mosquitto/data
+      - /mnt/docker/configs/mosquitto.cozzo.net/log:/mosquitto/log
+    restart: unless-stopped

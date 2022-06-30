@@ -1,0 +1,17 @@
+---
+version: "2"
+services:
+  grocy:
+    image: linuxserver/grocy
+    container_name: grocy
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/docker/blue/grocy/config:/config
+    ports:
+      - "9281:443"
+      - "9282:6781"
+      - "9283:80"
+    restart: unless-stopped

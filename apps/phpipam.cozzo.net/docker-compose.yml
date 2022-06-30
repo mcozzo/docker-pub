@@ -1,0 +1,21 @@
+---
+#version: '2'
+#
+#services:
+#  ipam:
+#    depends_on:
+#      - mysql
+#    image: pierrecdn/phpipam
+#    environment:
+#      - MYSQL_ENV_MYSQL_USER=root
+#      - MYSQL_ENV_MYSQL_ROOT_PASSWORD=WRzQrTvzblStVU*&zSG#XZj&
+#      - MYSQL_ENV_MYSQL_HOST=mysql
+#    ports:
+#      - "8282:80"
+#  mysql:
+#    image: mysql:5.6
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=WRzQrTvzblStVU*&zSG#XZj&
+#    restart: always
+#    volumes:
+#      - /mnt/docker/configs/phpipam/db_data:/var/lib/mysql

@@ -1,0 +1,23 @@
+---
+version: '2.3'
+services:
+  jackett:
+    image: "linuxserver/jackett"
+    restart: unless-stopped
+    ports:
+      - "9117:9117"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+    #volume_driver: netapp
+    volumes:
+      #- /mnt/docker/configs/jackett.cozzo.net/config:/config
+      - /mnt/docker-local/configs/jackett.cozzo.net/config:/config
+      #- /mnt/dockeriscsi/configs/jackett.cozzo.net/config:/config
+      #- jackett_cozzo_net_config:/config
+      - /mnt/download/data:/downloads
+
+#volumes:
+#  jackett_cozzo_net_config:
+#    driver: netapp-iscsi:latest

@@ -1,0 +1,23 @@
+---
+version: '2'
+services:
+  transmission:
+    image: "linuxserver/transmission"
+    restart: unless-stopped
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/docker/configs/transmission.cozzo.net/config:/config
+      #- /mnt/dockeriscsi/configs/transmission.cozzo.net/config:/config
+      #- transmission_cozzo_net_config:/config
+      - /mnt/download:/shareddata
+
+#volumes:
+#  transmission_cozzo_net_config:
+#    driver: netapp-iscsi:latest

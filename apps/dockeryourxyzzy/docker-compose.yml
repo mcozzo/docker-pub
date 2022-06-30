@@ -1,0 +1,47 @@
+---
+
+version: "3"
+
+services:
+
+  pyx:
+    image: emcniece/dockeryourxyzzy:latest
+    build: ./
+    ports:
+      - "8080:8080"
+    volumes:
+      - .pyx:/app
+    networks:
+      - pyx-net
+    environment:
+      PGID: 1000
+      PUID: 1000
+      TZ: America/Los_Angeles
+      TOMCAT_USER: tomcat_user
+      TOMCAT_PASSWORD: tomcat_password
+      DB_NAME: pyx
+      DB_USER: pyx
+      DB_PASSWORD: CorrectHorseBatteryStaple
+
+  postgres:
+    image: "postgres:alpine"
+    volumes:
+      - /mnt/docker/blue/dockeryourxyzzy/postgress/:/var/lib/postgresql/data
+    networks:
+      - pyx-net
+    environment:
+      - POSTGRES_DB=pyx
+      - POSTGRES_USER=pyx
+      - POSTGRES_PASSWORD=CorrectHorseBatteryStaple
+
+#  ngrok:
+#    image: wernight/ngrok:latest
+#    networks:
+#      - pyx-net
+#    ports:
+#      - "4040:4040"
+#    environment:
+#      - NGROK_PORT=pyx:8080
+
+networks:
+  pyx-net:

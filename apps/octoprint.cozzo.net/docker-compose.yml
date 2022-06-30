@@ -1,0 +1,52 @@
+version: '2.4'
+
+services:
+  octoprint:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 80:80
+      #- 8080:8080
+      #- 443:443
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/video0:/dev/video0
+      #- /dev/video1:/dev/video1
+      #- /dev/video2:/dev/video2
+      #- /dev:/dev
+    privileged: true
+    volumes:
+      - /mnt/docker/configs/octoprint.cozzo.net/config:/octoprint
+      - /usr/bin/vcgencmd:/usr/bin/vcgencmd:ro
+      - /usr/lib/aarch64-linux-gnu/libvcos.so.0:/usr/lib/aarch64-linux-gnu/libvcos.so.0:ro
+      - /usr/lib/aarch64-linux-gnu/libvchiq_arm.so.0:/usr/lib/aarch64-linux-gnu/libvchiq_arm.so.0:ro
+    privileged: true
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - UDEV=1
+      - MJPG_RES=640x480
+      - MJPG_FPS=25
+
+  ####
+  # uncomment if you wish to edit the configuration files of octoprint
+  # refer to docs on configuration editing for more information
+  ####
+
+  #config-editor:
+  #  image: linuxserver/code-server
+  #  ports:
+  #    - 8443:8443
+  #  depends_on:
+  #    - octoprint
+  #  restart: unless-stopped
+  #  environment:
+  #    - PGID=1001
+  #    - PUID=1001
+  #    - TZ=America/Los_Angeles
+  #  volumes:
+  #    - /mnt/docker/configs/octoprint.cozzo.net/config:/octoprint
+
+
+# This is a comment and can be deleted later.

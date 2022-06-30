@@ -1,0 +1,20 @@
+---
+version: '2'
+services:
+  ombi:
+    image: "linuxserver/ombi"
+    restart: unless-stopped
+    ports:
+      - "3579:3579"
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/docker/configs/ombi.cozzo.net/config:/config
+      #- /mnt/dockeriscsi/configs/ombi.cozzo.net/config:/config
+      #- ombi_cozzo_net_config:/config
+
+#volumes:
+#  ombi_cozzo_net_config:
+#    driver: netapp-iscsi:latest
